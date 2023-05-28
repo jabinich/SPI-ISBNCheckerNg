@@ -3,10 +3,10 @@
   <div class="content">
     <div class="row">
       <mat-form-field>
-        <input matInput placeholder="eine ISBN eingeben ..." [(ngModel)]="input">
+        <input matInput placeholder="eine ISBN eingeben ..." [(ngModel)]="input" (keyup.enter)="input && validate()">
         <mat-hint>Leerzeichen o. Bindezeichen als Trennung erlaubt</mat-hint>
       </mat-form-field>
-      <button mat-raised-button color="primary" (click)="validate()">prüfen</button>
+      <button mat-raised-button color="primary" (click)="input && validate()">prüfen</button>
     </div>
     <div class="row txtBold" *ngIf="visError">
       <mat-icon fontIcon="close" color="accent"></mat-icon>{{txtError}}

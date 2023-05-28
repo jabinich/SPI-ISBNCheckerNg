@@ -35,10 +35,12 @@ export class AppComponent {
   validate(): void {
     this.ibsnService.validate(this.input).subscribe({
       next: (isbn) => {
+        this.resetInput();
         this.isbn = isbn;
         this.setResultOutput();
       },
       error: (err) => {
+        this.resetInput();
         console.debug('Error', err);
         this.isServError = true;
         this.setResultOutput();
@@ -47,14 +49,13 @@ export class AppComponent {
   }
 
   setResultOutput(): void {
-    this.resetInput();
-
+    
     if (this.isServError){
       this.visError = true;
       this.visWarning = false;
       this.visValidity = false;
 
-      this.txtError = 'Serverfehler!';
+      this.txtError = 'Serverfehler! Versuchen Sie es später.';
     }
     else if (this.isbn.isvalid) { //ISBN gültig
       this.visError = false;
@@ -68,7 +69,7 @@ export class AppComponent {
       this.visWarning = true;
       this.visValidity = true;
 
-      this.txtError = 'Die eingegebene ' + this.isbn.isformat + ' ist nicht gültig.';
+      this.txtError = 'Die eingegebene ' + this.isbn.isbntype + ' ist nicht gültig.';
       this.txtWarning = 'Die Prüfziffer wurde korrigirt.';
       this.txtValidity = this.isbn.isbnfinal;
     }

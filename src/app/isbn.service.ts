@@ -26,11 +26,11 @@ export class IsbnService {
         isbnfinal: data.isbn
       }) as ISBN),
       catchError(error => {
-        console.error(error);
-        return throwError('Server Fehler');
+        //console.error(error);
+        return throwError(() => new Error(error)); 
       })
     );
-    
+
   }
 }
 
